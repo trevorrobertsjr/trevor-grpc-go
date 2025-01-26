@@ -8,8 +8,8 @@ import (
 )
 
 func doCalculator(c pb.CalculatorServiceClient) {
-	var num1 uint32 = 5
-	var num2 uint32 = 7
+	var num1 int32 = 5
+	var num2 int32 = 7
 	log.Printf("doCalculator was invoked to add %d and %d\n", num1, num2)
 	res, err := c.Calculator(context.Background(), &pb.CalculatorRequest{
 		Number1: num1,
