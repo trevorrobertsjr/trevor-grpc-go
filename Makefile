@@ -37,15 +37,16 @@ else
 endif
 
 .DEFAULT_GOAL := help
-.PHONY: greet blog calculator help prime
-project := greet calculator blog prime
+.PHONY: greet blog calculator help prime average
+project := greet calculator blog prime average
 
 all: $(project) ## Generate Pbs and build
 
 greet: $@ ## Generate Pbs and build for greet
 calculator: $@ ## Generate Pbs and build for calculator
 blog: $@ ## Generate Pbs and build for blog
-prime: $@ ## Generate Pbs and build for blog
+prime: $@ ## Generate Pbs and build for prime decomposition
+average: $@ ## Generate Pbs and build for averages
 
 $(project):
 	@${CHECK_DIR_CMD}
@@ -74,6 +75,9 @@ clean_prime: ## Clean generated files for primes
 
 clean_blog: ## Clean generated files for blog
 	${RM_F_CMD} blog/${PROTO_DIR}/*.pb.go
+
+clean_average: ## Clean generated files for average
+	${RM_F_CMD} average/${PROTO_DIR}/*.pb.go
 
 rebuild: clean all ## Rebuild the whole project
 
