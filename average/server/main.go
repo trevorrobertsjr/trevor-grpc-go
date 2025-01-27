@@ -1,6 +1,12 @@
 package main
 
-import pb "github.com/trevorrobertsjr/trevor-grpc-go/average/proto"
+import (
+	"log"
+	"net"
+
+	pb "github.com/trevorrobertsjr/trevor-grpc-go/average/proto"
+	"google.golang.org/grpc"
+)
 
 var addr = "0.0.0.0:50051"
 
@@ -9,5 +15,19 @@ type Server struct {
 }
 
 func main() {
+	lis, err := net.Listen("tcp", addr)
+
+	if err != nil {
+		log.Fatalf("Failed to listen on: %v\n", err)
+	}
+
+	log.Printf("Listening on %s\n", addr)
+
+	s := grpc.NewServer()
+	pb.RegisterAverageServiceServer(s, &Server{})
+
+	if err = s.Serve(lis); err != nil {
+		log.Fatalf("Failed to serve: %v\n", err)
+	}
 
 }

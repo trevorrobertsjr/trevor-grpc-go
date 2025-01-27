@@ -9,7 +9,7 @@ message AverageRequest {
 }
 
 message AverageResponse {
-    int32 result =1;
+    double result =1;
 }
 
 service AverageService {
